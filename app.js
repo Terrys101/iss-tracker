@@ -1,8 +1,21 @@
-const map = L.map('map').setView([0,0], 0);
-const marker = L.marker([0,0]).addTo(map);
+//Marking a map and titles
+const map = L.map('map').setView([0,0], 1);
 const attribution ='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
 const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const tiles = L.tileLayer(tileUrl, { attribution });
+tiles.addTo(map);
+// Marking a marker with a png file
+const myIcon = L.icon({
+    iconUrl: 'Station.png',
+    iconSize: [50,32],
+    iconAnchor: [25, 16],
+     popupAnchor: [-3, -76],
+     shadowUrl: 'International_Space_Station.svg',
+    // shadowSize: [68, 95],
+    // shadowAnchor: [22, 94]
+});
+const marker = L.marker([0,0], {icon:myIcon}).addTo(map);
 tiles.addTo(map);
 
 
