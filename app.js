@@ -21,18 +21,26 @@ tiles.addTo(map);
 
 const api_url = 'https://api.wheretheiss.at/v1/satellites/25544'
 
+let firstTime = false
+
 async function getISS(){
 const response = await fetch(api_url);
 const data = await response.json();
 const {latitude, longitude} = data
 marker.setLatLng([latitude,longitude])
-document.getElementById('latitude').textContent = latitude;
-document.getElementById('longitude').textContent = longitude
+if(firstTime){
+map.setView([latitude,longitude],2)
+firstTime = false;
+} 
+document.getElementById('latitude').textContent = latitude.toFixed(2);
+document.getElementById('longitude').textContent = longitude.toFixed(2);
 
 
 }
 getISS();
 
+
+setInterval(getISS, 3000)
 
 
 
